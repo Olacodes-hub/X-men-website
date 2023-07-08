@@ -72,11 +72,13 @@ resource "aws_route_table" "private_route_table_az2" {
   }
 }
 
+# associate route table with private app subnet AZ1
 resource "aws_route_table_association" "private_app_subnet_az1" {
   subnet_id      = aws_subnet.private_app_subnet_az1.id
   route_table_id = aws_route_table.private_route_table_az1.id
 }
 
+# associate route table with private app subnet AZ2
 resource "aws_route_table_association" "private_app_subnet_az2" {
   subnet_id      = aws_subnet.private_app_subnet_az2.id
   route_table_id = aws_route_table.private_route_table_az2.id

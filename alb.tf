@@ -1,5 +1,5 @@
 
-
+# create an application load balancer
 resource "aws_lb" "application_load_balancer" {
   name               = "dev-alb"
   load_balancer_type = "application"
@@ -12,6 +12,7 @@ resource "aws_lb" "application_load_balancer" {
   }
 }
 
+# create a target group
 resource "aws_lb_target_group" "tg" {
   name        = "dev-tg"
   target_type = "instance"
@@ -30,14 +31,13 @@ resource "aws_lb_target_group" "tg" {
   }
 }
 
-
+# create https listener for load balancer
 resource "aws_lb_listener" "https_listener" {
   load_balancer_arn = aws_lb.application_load_balancer.arn
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:acm:us-east-1:732025887430:certificate/fe172d4a-7b60-4928-99f7-91fa4a83be08"
-
+  certificate_arn   = var.certificate_arn
 
   default_action {
     type             = "forward"
@@ -45,6 +45,7 @@ resource "aws_lb_listener" "https_listener" {
   }
 }
 
+# create http listener for load balancer
 resource "aws_lb_listener" "http_listener" {
   load_balancer_arn = aws_lb.application_load_balancer.arn
   port              = 80

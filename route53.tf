@@ -1,7 +1,9 @@
+#ref existing hosted zone in aws account
 data "aws_route53_zone" "hosted_zone" {
   name = "justgetitalready.com" # Replace with your existing domain name
 }
 
+#create "A" record
 resource "aws_route53_record" "domain" {
   zone_id = data.aws_route53_zone.hosted_zone.zone_id
   name    = "www" # Replace with your desired record name
