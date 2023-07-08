@@ -89,8 +89,8 @@ resource "aws_security_group" "webserver_sg" {
     to_port         = 22
     protocol        = "tcp"
     security_groups = [aws_security_group.ssh_sg.id]
-    
-    }
+
+  }
 
 
   egress {
