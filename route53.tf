@@ -1,4 +1,3 @@
-
 data "aws_route53_zone" "hosted_zone" {
   name = "justgetitalready.com" # Replace with your existing domain name
 }
