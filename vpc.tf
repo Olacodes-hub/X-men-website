@@ -93,9 +93,3 @@ resource "aws_subnet" "private_app_subnet_az2" {
 }
 
 
-
-provider "aws" {
-  region  = "us-east-1"
-  profile = "terraform-user"
-
-}
