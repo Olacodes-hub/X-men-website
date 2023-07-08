@@ -39,7 +39,6 @@ resource "aws_lb_listener" "https_listener" {
   certificate_arn   = "arn:aws:acm:us-east-1:732025887430:certificate/fe172d4a-7b60-4928-99f7-91fa4a83be08"
 
 
-
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.tg.arn

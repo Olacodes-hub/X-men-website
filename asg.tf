@@ -1,11 +1,11 @@
 
 resource "aws_launch_template" "launch_template" {
-  name            = "dev-asg"
-  image_id        = "ami-09e0cf8dede3e542a"                                      # Replace with the desired AMI ID
-  instance_type   = "t2.micro"                                                   # Replace with the desired instance type
+  name                   = "dev-asg"
+  image_id               = "ami-09e0cf8dede3e542a"                                      # Replace with the desired AMI ID
+  instance_type          = "t2.micro"                                                   # Replace with the desired instance type
   vpc_security_group_ids = [aws_security_group.ssh_sg.id, aws_security_group.alb_sg.id] # Replace with the desired security group ID(s)
-  key_name        = "mykey"
-  description     = "asg for launch template"
+  key_name               = "mykey"
+  description            = "asg for launch template"
 }
 
 resource "aws_autoscaling_group" "auto_sg" {
@@ -37,5 +37,5 @@ resource "aws_autoscaling_group" "auto_sg" {
 
 resource "aws_autoscaling_attachment" "alb_target_group_attachment" {
   autoscaling_group_name = aws_autoscaling_group.auto_sg.name
-  lb_target_group_arn   = aws_lb_target_group.tg.arn
+  lb_target_group_arn    = aws_lb_target_group.tg.arn
 }
