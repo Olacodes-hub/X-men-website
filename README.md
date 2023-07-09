@@ -109,3 +109,6 @@ Remember to monitor your resources, regularly apply security updates, and take n
 For more detailed instructions and advanced configurations, please refer to the official AWS documentation.
 
 Happy hosting!
+
+![EC2 Web Hosting Architexture](image_url)
+
