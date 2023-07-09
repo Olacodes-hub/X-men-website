@@ -110,5 +110,5 @@ For more detailed instructions and advanced configurations, please refer to the 
 
 Happy hosting!
 
-![EC2 Web Hosting Architexture]([EC2 Web Hosting Architexture.png](https://github.com/Olacodes-hub/X-men-website/blob/main/EC2%20Web%20Hosting%20Architexture.png)https://github.com/Olacodes-hub/X-men-website/blob/main/EC2%20Web%20Hosting%20Architexture.png)
+![EC2 Web Hosting Architexture](https://github.com/Olacodes-hub/X-men-website/blob/main/EC2%20Web%20Hosting%20Architexture.png)https://github.com/Olacodes-hub/X-men-website/blob/main/EC2%20Web%20Hosting%20Architexture.png)
 
