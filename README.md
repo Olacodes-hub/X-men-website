@@ -111,10 +111,14 @@ For more detailed instructions and advanced configurations, please refer to the 
 Happy hosting!
 
 Script:
-#!/bin/bash
-sudo su.
+#!/bin/bash  
+
+sudo su  
+
 yum update -y.
 yum install httpd -y.
+
+
 systemctl enable httpd.
 systemctl start httpd.
 cd /var/www/html.
