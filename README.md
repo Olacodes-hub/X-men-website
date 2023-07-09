@@ -130,7 +130,8 @@ sudo aws s3 sync s3://xmenproject-bucket /var/www/html
 
 sudo mv xmen-main/* .  
 
-systemctl restart httpd
+systemctl restart httpd  
+
 
 
 ![EC2 Web Hosting Architexture](https://github.com/Olacodes-hub/X-men-website/blob/main/EC2%20Web%20Hosting%20Architexture.png)https://github.com/Olacodes-hub/X-men-website/blob/main/EC2%20Web%20Hosting%20Architexture.png)
