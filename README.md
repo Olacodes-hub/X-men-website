@@ -110,5 +110,5 @@ For more detailed instructions and advanced configurations, please refer to the 
 
 Happy hosting!
 
-![EC2 Web Hosting Architexture](image_url)
+![EC2 Web Hosting Architexture](EC2 Web Hosting Architexture.png)
 
