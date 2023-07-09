@@ -112,15 +112,15 @@ Happy hosting!
 
 Script:
 #!/bin/bash
-sudo su
-yum update -y
-yum install httpd -y
-systemctl enable httpd
-systemctl start httpd
-cd /var/www/html
-sudo aws s3 sync s3://xmenproject-bucket /var/www/html
+sudo su.
+yum update -y.
+yum install httpd -y.
+systemctl enable httpd.
+systemctl start httpd.
+cd /var/www/html.
+sudo aws s3 sync s3://xmenproject-bucket /var/www/html.
 sudo mv xmen-main/* .
-systemctl restart httpd
+systemctl restart httpd.
 
 
 
