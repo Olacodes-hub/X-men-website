@@ -110,7 +110,8 @@ For more detailed instructions and advanced configurations, please refer to the 
 
 Happy hosting!
 
-Script:
+Script:  
+
 #!/bin/bash  
 
 sudo su  
