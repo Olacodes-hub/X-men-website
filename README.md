@@ -102,11 +102,6 @@ Before proceeding with the website hosting setup, ensure you have the following:
 1. Open a web browser and enter your domain name.
 2. Verify that the website loads correctly and all functionalities are working as expected.
 
-Congratulations! Your website is now hosted on the AWS EC2 instances using an Application Load Balancer with HTTPS support and Auto Scaling.
-
-Remember to monitor your resources, regularly apply security updates, and take necessary backups to ensure the availability and security of your hosted website.
-
-For more detailed instructions and advanced configurations, please refer to the official AWS documentation.
 
 Happy hosting!
 
