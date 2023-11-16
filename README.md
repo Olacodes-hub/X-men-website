@@ -1,132 +1,102 @@
-# Hosting a Website on AWS EC2 Instance - README
+Certainly! Here's a sample README file for your DevOps project on hosting a static HTML web app on AWS:
 
-This README file provides instructions for hosting a website on an AWS EC2 instance using the following resources:
+---
 
-- 1 VPC (Virtual Private Cloud)
-- 2 Public Subnets and 2 Private Subnets in 2 Availability Zones
-- 2 NAT Gateways
-- 1 Internet Gateway
-- 1 Public Route Table
-- 2 Private Route Tables
-- Routing Configuration
-- SSH Security Group
-- Application Load Balancer Security Group
-- Web Server Security Group
-- 1 Application Load Balancer (ALB) with Target Group
-- Auto Scaling Group (ASG) with a minimum of 2 Web Servers (with HTTPS)
+# Static Website Deployment on AWS
 
-## Prerequisites
+## Overview
 
-Before proceeding with the website hosting setup, ensure you have the following:
+This project demonstrates the deployment of a static HTML web application on Amazon Web Services (AWS). The infrastructure is set up using a Virtual Private Cloud (VPC) with public and private subnets across two availability zones for high availability and fault tolerance.
 
-- An AWS account with appropriate permissions to create and manage resources.
-- A domain name registered and managed through Route 53 (optional but recommended).
-- An SSL/TLS certificate for securing HTTPS traffic (required for ALB).
+## Infrastructure Components
 
-## Step 1: Create a VPC
+1. **VPC with Subnets:**
+   - Configured a VPC with public and private subnets distributed across two availability zones.
 
-1. Log in to your AWS Management Console.
-2. Navigate to the VPC service.
-3. Click on "Create VPC" to start the VPC creation wizard.
-4. Provide a name and specify the desired IP address range for your VPC.
-5. Configure other VPC settings as required.
-6. Review and create the VPC.
+2. **Internet Gateway:**
+   - Utilized an Internet Gateway to enable communication between instances in the VPC and the Internet.
 
-## Step 2: Create Subnets and Availability Zones
+3. **Security Groups:**
+   - Implemented security groups to control inbound and outbound traffic, acting as a firewall for the infrastructure.
 
-1. Within the VPC service, navigate to "Subnets."
-2. Create 2 Public Subnets in different Availability Zones (AZs).
-3. Create 2 Private Subnets in different AZs.
-4. Ensure that the Public Subnets have auto-assign public IP enabled.
-5. Associate the appropriate Route Tables with the subnets.
+4. **Availability Zones:**
+   - Utilized two availability zones to enhance high availability and fault tolerance.
 
-## Step 3: Create NAT Gateways
+5. **Resources in Public Subnets:**
+   - Deployed resources such as NAT Gateway, Bastion Host, and Application Load Balancer in public subnets.
 
-1. In the VPC service, navigate to "NAT Gateways."
-2. Create 2 NAT Gateways, one in each Public Subnet.
-3. Associate the respective Elastic IP addresses with the NAT Gateways.
-4. Update the route tables of the Private Subnets to route internet-bound traffic through the NAT Gateways.
+6. **EC2 Instance Connect Endpoint:**
+   - Leveraged the EC2 Instance Connect Endpoint for secure and seamless connectivity to resources in public and private subnets.
 
-## Step 4: Set up Internet Gateway and Routing
+7. **Private Subnets:**
+   - Placed web servers and database servers in private subnets to enhance security.
 
-1. In the VPC service, navigate to "Internet Gateways."
-2. Create an Internet Gateway and attach it to the VPC.
-3. Update the Public Route Table to include a route for "0.0.0.0/0" pointing to the Internet Gateway.
-4. Verify that the Private Route Tables have routes for the NAT Gateways.
+8. **NAT Gateway:**
+   - Enabled instances in private subnets to access the internet using a NAT Gateway.
 
-## Step 5: Configure Security Groups
+9. **EC2 Instances:**
+   - Utilized EC2 instances to host the static website.
 
-1. Access the EC2 service in the AWS Management Console.
-2. Create a Security Group for SSH access to the EC2 instances.
-3. Create a Security Group for the Application Load Balancer (ALB) to allow incoming traffic on port 80 (HTTP) and port 443 (HTTPS).
-4. Create a Security Group for the Web Servers to allow incoming traffic on port 80 (HTTP) and port 443 (HTTPS).
-5. Configure the Security Group rules based on your specific requirements.
+10. **Application Load Balancer (ALB):**
+    - Deployed an ALB to distribute web traffic across an Auto Scaling Group of EC2 instances in multiple availability zones.
 
-## Step 6: Create an Application Load Balancer (ALB)
+11. **Auto Scaling Group:**
+    - Implemented Auto Scaling Group to dynamically create EC2 instances, ensuring high availability, scalability, fault tolerance, and elasticity.
 
-1. In the EC2 service, navigate to "Load Balancers."
-2. Create an Application Load Balancer (ALB) with the desired configuration.
-3. Configure the ALB to use the created Security Group and select the appropriate subnets.
-4. Create a Target Group and associate it with the ALB.
+12. **Route 53:**
+    - Registered the domain name and created a record set using Route 53.
 
-## Step 7: Set up Auto Scaling Group (ASG)
+13. **GitHub:**
+    - Stored web files on GitHub for version control and easy deployment.
 
-1. In the EC2 service, navigate to "Auto Scaling Groups."
-2. Create an Auto Scaling Group (ASG) with the desired configuration.
-3. Specify the minimum and desired number of instances as 2 (or more as needed).
-4. Select the created Launch Template or Configuration for the ASG.
-5. Configure the ASG to use the ALB Target Group.
-6. Enable health checks for the instances.
-7. Set up scaling policies and notifications as per your requirements.
+14. **EC2 Instance AMI Creation:**
+    - After installing the website on the EC2 instance, an Amazon Machine Image (AMI) is created for future use.
 
-## Step 8: Configure DNS (Optional)
+## Deployment Script
 
-1. If using a domain name registered through Route 53:
-   - Navigate to the Route 53 service in the AWS Management Console.
-   - Create a new "A" record or edit an existing one to point to the ALB's DNS name.
-   - Wait for DNS propagation to complete, which may take some time.
+```bash
+#!/bin/bash
+sudo su
+yum update -y
+yum install -y httpd
+cd /var/www/html
+wget https://github.com/azeezsalu/mole-sit...
+unzip mole.zip
+cp -r /var/www/html/mole-main/* /var/www/html
+rm -rf mole.zip mole-main
+systemctl enable httpd
+systemctl start httpd
+```
 
-2. If using a domain name registered with a different provider:
-   - Access your domain registrar's control panel or DNS management interface.
-   - Create a DNS record (usually an "A" record) pointing to the ALB's DNS name.
-   - Follow the instructions provided by your domain registrar for making DNS changes.
+This script updates the system, installs Apache (httpd), downloads the web files from GitHub, and configures the web server.
 
-## Step 9: Upload Website Files
+## Usage
 
-1. Connect to the EC2 instances using SSH or the remote desktop protocol (RDP).
-2. Copy your website files to the appropriate directory on the instances.
-3. Verify that the website files are accessible and placed correctly.
+1. **Clone the Repository:**
+   - Clone this GitHub repository to your local machine.
 
-## Step 10: Test and Verify
+2. **Configure AWS CLI:**
+   - Ensure that the AWS CLI is configured with the necessary access and secret keys.
 
-1. Open a web browser and enter your domain name.
-2. Verify that the website loads correctly and all functionalities are working as expected.
+3. **Run the Deployment Script:**
+   - Execute the provided deployment script on your EC2 instance.
 
+4. **Access the Website:**
+   - Once the deployment is complete, access the website using the provided domain name.
 
-Happy hosting!
+For more detailed instructions, refer to the [Wiki](wiki-link) of this repository.
 
-Script:  
+## Contributors
 
-#!/bin/bash  
+- Olalekan Famoroti
 
-sudo su  
+## License
 
-yum update -y.  
+This project is licensed under the [License Name] - see the [LICENSE.md](LICENSE.md) file for details.
 
-yum install httpd -y  
+---
 
-systemctl enable httpd  
-
-systemctl start httpd  
-
-cd /var/www/html  
-
-sudo aws s3 sync s3://xmenproject-bucket /var/www/html  
-
-sudo mv xmen-main/* .  
-
-systemctl restart httpd  
-
+Feel free to customize it based on your specific project details and requirements.
 
 
 ![EC2 Web Hosting Architexture](https://github.com/Olacodes-hub/X-men-website/blob/main/EC2%20Web%20Hosting%20Architexture.png)https://github.com/Olacodes-hub/X-men-website/blob/main/EC2%20Web%20Hosting%20Architexture.png)
