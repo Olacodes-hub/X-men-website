@@ -1,6 +1,4 @@
-Certainly! Here's a sample README file for your DevOps project on hosting a static HTML web app on AWS:
 
----
 
 # Static Website Deployment on AWS
 
